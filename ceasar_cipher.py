@@ -6,7 +6,7 @@ __author__ = "VFM | SB"
 __email__ = "vfm_sb@proton.me"
 __copyright__ = "Copyleft 2022"
 __license__ = "MIT"
-__version__ = "0.5.0"
+__version__ = "0.5.1"
 __maintainer__ = "VFM | SB"
 __status__ = "Practice"
 
@@ -56,12 +56,13 @@ def main():
             print("Decrypted Message:", decrypted_message)
         else:
             print("Invalid Operation!")
-        print('\nWould You Like to Restart? ("yes" | "no")')
+        print('\nWould You Like to Continue? ("yes" | "no")')
         restart = input()
         if restart == "no" or restart != "yes":
             is_end = True
             print("Good Bye!")
-        print()
+        else:
+            print()
 
 
 main()

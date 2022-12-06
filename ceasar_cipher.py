@@ -6,7 +6,7 @@ __author__ = "VFM | SB"
 __email__ = "vfm_sb@proton.me"
 __copyright__ = "Copyleft 2022"
 __license__ = "MIT"
-__version__ = "0.4.1"
+__version__ = "0.4.2"
 __maintainer__ = "VFM | SB"
 __status__ = "Practice"
 
@@ -23,15 +23,21 @@ def cipher_alphabet(shift: int) -> list:
 def encrypt(message: str, shift: int) -> str:
     shifted_alphabet = cipher_alphabet(shift)
     encrypted_message = ""
-    for letter in message:
-        encrypted_message += shifted_alphabet[ascii_lowercase.index(letter)]
+    for char in message.lower():
+        if char not in ascii_lowercase:
+            encrypted_message += char
+            continue
+        encrypted_message += shifted_alphabet[ascii_lowercase.index(char)]
     return encrypted_message
 
 def decrypt(encrypted_message: str, shift: int) -> str:
     shifted_alphabet = cipher_alphabet(shift)
     decrypted_message = ""
-    for letter in encrypted_message:
-        decrypted_message += ascii_lowercase[shifted_alphabet.index(letter)]
+    for char in encrypted_message.lower():
+        if char not in ascii_lowercase:
+            decrypted_message += char
+            continue
+        decrypted_message += ascii_lowercase[shifted_alphabet.index(char)]
     return decrypted_message
 
 def main():

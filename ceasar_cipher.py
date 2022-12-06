@@ -6,7 +6,7 @@ __author__ = "VFM | SB"
 __email__ = "vfm_sb@proton.me"
 __copyright__ = "Copyleft 2022"
 __license__ = "MIT"
-__version__ = "0.5.1"
+__version__ = "0.6.0"
 __maintainer__ = "VFM | SB"
 __status__ = "Practice"
 
@@ -14,32 +14,31 @@ import os
 from string import ascii_lowercase # Built-in Modules
 
 
+AVAILABLE_OPERATIONS = ["encode", "decode"]
+
+
 def cipher_alphabet(shift: int) -> list:
-    shift = shift % len(ascii_lowercase)
-    shifted_alphabet = ["*" for _ in range(len(ascii_lowercase))]
-    for i in range(len(ascii_lowercase)):
+    alphabet_length = len(ascii_lowercase)
+    shift = shift % alphabet_length
+    shifted_alphabet = ["*" for _ in range(alphabet_length)]
+    for i in range(alphabet_length):
         shifted_alphabet[i - shift] = ascii_lowercase[i]
     return shifted_alphabet
 
-def encrypt(message: str, shift: int) -> str:
+def cipher(start_text: str, shift: int, operation: str) -> str:
     shifted_alphabet = cipher_alphabet(shift)
-    encrypted_message = ""
-    for char in message.lower():
+    end_text = ""
+    for char in start_text.lower():
         if char not in ascii_lowercase:
-            encrypted_message += char
+            end_text += char
             continue
-        encrypted_message += shifted_alphabet[ascii_lowercase.index(char)]
-    return encrypted_message
+        if operation == "encode":
+            shifted_char = shifted_alphabet[ascii_lowercase.index(char)]
+        else:
+            shifted_char = ascii_lowercase[shifted_alphabet.index(char)]
+        end_text += shifted_char
+    return end_text
 
-def decrypt(encrypted_message: str, shift: int) -> str:
-    shifted_alphabet = cipher_alphabet(shift)
-    decrypted_message = ""
-    for char in encrypted_message.lower():
-        if char not in ascii_lowercase:
-            decrypted_message += char
-            continue
-        decrypted_message += ascii_lowercase[shifted_alphabet.index(char)]
-    return decrypted_message
 
 def main():
     os.system("clear")
@@ -47,15 +46,17 @@ def main():
     print("-.-. . .- ... .- .-.    -.-. .. .--. .... . .-.\n")
     is_end = False
     while not is_end:
-        operation = input('Choose an Operation ("encode" to Encrypt, "decode" to Decrypt):\n')
+        operation = input(
+            'Choose an Operation '
+            '("encode" to Encrypt, "decode" to Decrypt):\n'
+        )
         text = input(f"Message to {operation.capitalize()}:\n")
         shift_amount = int(input("Shift Number:\n"))
-        if operation == "encode":
-            encrypted_message = encrypt(message=text, shift=shift_amount)
-            print("Encrypted Message:", encrypted_message)
-        elif operation == "decode":
-            decrypted_message = decrypt(encrypted_message=text, shift=shift_amount)
-            print("Decrypted Message:", decrypted_message)
+        if operation in AVAILABLE_OPERATIONS:
+            print(
+                f"{operation.capitalize()}d Message:\n",
+                cipher(text, shift_amount, operation)
+            )
         else:
             print("Invalid Operation!")
         print('\nWould You Like to Continue? ("yes" | "no")')

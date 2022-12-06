@@ -6,7 +6,7 @@ __author__ = "VFM | SB"
 __email__ = "vfm_sb@proton.me"
 __copyright__ = "Copyleft 2022"
 __license__ = "MIT"
-__version__ = "0.4.2"
+__version__ = "0.5.0"
 __maintainer__ = "VFM | SB"
 __status__ = "Practice"
 
@@ -43,24 +43,25 @@ def decrypt(encrypted_message: str, shift: int) -> str:
 def main():
     print(f"Ceasar Cipher CLI v{__version__}")
     print("-.-. . .- ... .- .-.    -.-. .. .--. .... . .-.\n")
-    operation = input('Choose an Operation ("encode" to Encrypt, "decode" to Decrypt):\n')
-    text = input(f"Message to {operation.capitalize()}:\n")
-    shift_amount = int(input("Shift Number:\n"))
-    if operation == "encode":
-        encrypted_message = encrypt(message=text, shift=shift_amount)
-        print("Encrypted Message:", encrypted_message)
-    elif operation == "decode":
-        decrypted_message = decrypt(encrypted_message=text, shift=shift_amount)
-        print("Decrypted Message:", decrypted_message)
-    else:
-        print("Invalid Operation!")
-    print('\nWould You Like to Restart? ("yes" | "no")')
-    restart = input()
-    if restart == "yes":
+    is_end = False
+    while not is_end:
+        operation = input('Choose an Operation ("encode" to Encrypt, "decode" to Decrypt):\n')
+        text = input(f"Message to {operation.capitalize()}:\n")
+        shift_amount = int(input("Shift Number:\n"))
+        if operation == "encode":
+            encrypted_message = encrypt(message=text, shift=shift_amount)
+            print("Encrypted Message:", encrypted_message)
+        elif operation == "decode":
+            decrypted_message = decrypt(encrypted_message=text, shift=shift_amount)
+            print("Decrypted Message:", decrypted_message)
+        else:
+            print("Invalid Operation!")
+        print('\nWould You Like to Restart? ("yes" | "no")')
+        restart = input()
+        if restart == "no" or restart != "yes":
+            is_end = True
+            print("Good Bye!")
         print()
-        main()
-    else:
-        print("Good Bye!")
 
 
 main()

@@ -6,7 +6,7 @@ __author__ = "VFM | SB"
 __email__ = "vfm_sb@proton.me"
 __copyright__ = "Copyleft 2022"
 __license__ = "MIT"
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 __maintainer__ = "VFM | SB"
 __status__ = "Practice"
 
@@ -32,6 +32,22 @@ def decrypt(encrypted_message: str, shift: int) -> str:
     for letter in encrypted_message:
         decrypted_message += ascii_lowercase[shifted_alphabet.index(letter)]
     return decrypted_message
+
+def main():
+    print(f"Ceasar Cipher CLI v{__version__}")
+    print("-.-. . .- ... .- .-.    -.-. .. .--. .... . .-.")
+    operation = input('Operations ("encode" to Encrypt, "decode" to Decrypt):\n')
+    text = input(f"Message to {operation.capitalize()}:\n")
+    shift_amount = int(input("Shift Number:\n"))
+    if operation == "encode":
+        encrypted_message = encrypt(message=text, shift=shift_amount)
+        print("Encrypted Message:", encrypted_message)
+    elif operation == "decode":
+        decrypted_message = decrypt(encrypted_message=text, shift=shift_amount)
+        print("Decrypted Message:", decrypted_message)
+
+
+main()
 
 
 # Function Testing

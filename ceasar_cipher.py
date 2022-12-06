@@ -10,6 +10,7 @@ __version__ = "0.5.1"
 __maintainer__ = "VFM | SB"
 __status__ = "Practice"
 
+import os
 from string import ascii_lowercase # Built-in Modules
 
 
@@ -41,6 +42,7 @@ def decrypt(encrypted_message: str, shift: int) -> str:
     return decrypted_message
 
 def main():
+    os.system("clear")
     print(f"Ceasar Cipher CLI v{__version__}")
     print("-.-. . .- ... .- .-.    -.-. .. .--. .... . .-.\n")
     is_end = False

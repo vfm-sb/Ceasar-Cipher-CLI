@@ -6,7 +6,7 @@ __author__ = "VFM | SB"
 __email__ = "vfm_sb@proton.me"
 __copyright__ = "Copyleft 2022"
 __license__ = "MIT"
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 __maintainer__ = "VFM | SB"
 __status__ = "Practice"
 
@@ -14,6 +14,7 @@ from string import ascii_lowercase # Built-in Modules
 
 
 def cipher_alphabet(shift: int) -> list:
+    shift = shift % len(ascii_lowercase)
     shifted_alphabet = ["*" for _ in range(len(ascii_lowercase))]
     for i in range(len(ascii_lowercase)):
         shifted_alphabet[i - shift] = ascii_lowercase[i]

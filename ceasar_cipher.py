@@ -50,15 +50,16 @@ def main():
             'Choose an Operation '
             '("encode" to Encrypt, "decode" to Decrypt):\n'
         )
+        if operation not in AVAILABLE_OPERATIONS:
+            print("Invalid Operation Command!", "Try Again.\n", sep="\n")
+            continue
         text = input(f"Message to {operation.capitalize()}:\n")
         shift_amount = int(input("Shift Number:\n"))
-        if operation in AVAILABLE_OPERATIONS:
-            print(
-                f"{operation.capitalize()}d Message:\n",
-                cipher(text, shift_amount, operation)
-            )
-        else:
-            print("Invalid Operation!")
+        print(
+            f"{operation.capitalize()}d Message:\n",
+            cipher(text, shift_amount, operation),
+            sep=""
+        )
         print('\nWould You Like to Continue? ("yes" | "no")')
         restart = input()
         if restart == "no" or restart != "yes":

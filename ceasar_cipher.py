@@ -4,7 +4,7 @@ __author__ = "VFM | SB"
 __email__ = "vfm_sb@proton.me"
 __copyright__ = "Copyleft 2022"
 __license__ = "MIT"
-__version__ = "0.6.1"
+__version__ = "0.6.2"
 __maintainer__ = "VFM | SB"
 __status__ = "Practice"
 
@@ -16,6 +16,12 @@ AVAILABLE_OPERATIONS = ["encode", "decode"]
 
 
 def cipher_alphabet(shift: int) -> list:
+    """Shifts The Alphabet Based on the Given Shift Number
+    Argument:
+        shift (int): Shift Amount
+    Returns:
+        list: Shifted Alphabet for Ceasar Cipher
+    """
     alphabet_length = len(ascii_lowercase)
     shift = shift % alphabet_length
     shifted_alphabet = ["*" for _ in range(alphabet_length)]
@@ -24,6 +30,14 @@ def cipher_alphabet(shift: int) -> list:
     return shifted_alphabet
 
 def cipher(start_text: str, shift: int, operation: str) -> str:
+    """It Encodes or Decodes Given Text, Based on Operation Type
+    Arguments:
+        start_text (str): Text to be Encrypted or Decrypted
+        shift (int): Shift Amount for cipher_alphabet()
+        operation (str): Operation Type ("encode" | "decode")
+    Returns:
+        end_text (str): Encrypted or Decrypted Text
+    """
     shifted_alphabet = cipher_alphabet(shift)
     end_text = ""
     for char in start_text.lower():
@@ -39,6 +53,7 @@ def cipher(start_text: str, shift: int, operation: str) -> str:
 
 
 def main():
+    """Executive Main Function"""
     os.system("clear")
     print(f"Ceasar Cipher CLI v{__version__}")
     print("-.-. . .- ... .- .-.    -.-. .. .--. .... . .-.\n")
@@ -68,14 +83,3 @@ def main():
 
 
 main()
-
-
-# Function Testing
-if __name__ == "__main__":
-    pass
-    # message = "zulu"
-    # shift_amount = 1
-    # encrypted_message = encrypt(message, shift_amount)
-    # print(encrypted_message)
-    # decrypted_message = decrypt(encrypted_message, shift_amount)
-    # print(decrypted_message)
